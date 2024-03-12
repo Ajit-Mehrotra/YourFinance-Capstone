@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -17,7 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -33,15 +37,48 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+
+
+    public function liquidAccounts(): HasMany
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(liquidAccounts::class);
     }
+
+    public function investmentAccounts(): HasMany
+    {
+        return $this->hasMany(InvestmentAccounts::class);
+    }
+    
+    public function retirementAccounts(): HasMany
+    {
+        return $this->hasMany(RetirementAccounts::class);
+    }
+    
+    public function tangibleAssets(): HasMany
+    {
+        return $this->hasMany(TangibleAssets::class);
+    }
+
+    public function miscAssets(): HasMany
+    {
+        return $this->hasMany(MiscAssets::class);
+    }
+    public function debts(): HasMany
+    {
+        return $this->hasMany(Debts::class);
+    }
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
 }
