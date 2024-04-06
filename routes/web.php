@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -8,9 +9,6 @@ use App\Http\Controllers\ProfileController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return "Hello World";
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,28 +28,40 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/', function () {
+Route::get('/users', function () {
+    
+    $users = cache()->remember('users', now()->addSeconds(5), function () {
+        Log::info('Retrieving users');
+        return User::all();
+    });
+    
     return view('users',[
-        'users' => User::all()
+        'users' => $users
     ]);
 });
 
 Route::get('/users/{user}', function ($id) {
    
-    return view('user',[
-        'user' =>  User::find($id),
-        'liquidAccounts' => User::find($id)->liquidAccounts,
-        'investmentAccounts' => User::find($id)->investmentAccounts,
-        
-    ]);
+    $user = cache()->remember("users.{$id}", now()->addSeconds(5), function () use ($id) {
+        Log::info('Showing the user profile for user: {id}', ['id' => $id]);
+        $temp_user = User::find($id);
+        return ['user' => $temp_user, 'liquidAccounts' => $temp_user->liquidAccounts, 'investmentAccounts' => $temp_user->investmentAccounts,];
+    });
+    
+    return view('user', $user);
 });
 
-Route::get('/users', function () {
-    return view('users',[
-        'users' => User::all()
-    ]);
+Route::get('/', function () {
+    return view('welcome');
 });
 
+Route::get('/dashboard_test', function () {
+    return view('dashboard_test');
+});
+
+Route::get('/improve', function () {
+    return view('improve');
+});
 
 
 require __DIR__.'/auth.php';
