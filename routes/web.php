@@ -4,11 +4,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChatController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
+Route::post('/chat', [ChatController::class, 'chat']);
+
+Route::get('/chat', function () {
+    return view('chat');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,8 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
 
 
 Route::get('/dashboard', function () {
