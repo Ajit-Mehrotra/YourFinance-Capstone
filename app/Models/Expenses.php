@@ -15,6 +15,8 @@ class Expenses extends Model
 
     protected $fillable = [
         'expenses_name',
+        'liquid_account_id',
+        'category_id',
         'expenses_type',
         'date_received',
         'amount',
@@ -37,9 +39,9 @@ class Expenses extends Model
     {
         return $this->hasOne(Vendors::class);
     }
-    public function category(): HasOne
+    public function categories(): HasOne
     {
-        return $this->hasOne(Categories::class);
+        return $this->HasOne(Categories::class);
     }
     public function subscription(): HasOne
     {

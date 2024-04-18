@@ -1,10 +1,13 @@
 <?php
 
 use App\Models\User;
+use App\Models\Categories;
+use App\Models\Transactions;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\PlaidController;
+use App\Http\Controllers\ProfileController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -16,9 +19,6 @@ Route::get('/chat', function () {
     return view('chat');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,7 +28,17 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = auth()->user(); 
+    $user_id = $user->id;
+    
+    $categories = Categories::with(['transactions'])->get();
+    
+    $transactions = Transactions::with('category')->where('user_id', $user_id)->get();
+  
+   
+    return view('dashboard', ['user' => $user, 'liquidAccounts' => $user->liquidAccounts, 
+    'investmentAccounts' => $user->investmentAccounts, 'transactions' => $transactions, 
+    'retirementAccounts' => $user->retirementAccounts, 'miscAssets' => $user->miscAssets, 'tangibleAssets' => $user->tangibleAssets, 'categories'=> $categories]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -55,6 +65,12 @@ Route::get('/users/{user}', function ($id) {
     return view('user', $user);
 });
 
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -65,6 +81,16 @@ Route::get('/dashboard_test', function () {
 
 Route::get('/improve', function () {
     return view('improve');
+});
+
+
+Route::get('/createLinkToken', [PlaidController::class, 'createLinkToken']);
+Route::post('/storePlaidAccount', [PlaidController::class, 'storePlaidAccount']);
+Route::post('/getInvestmentHoldings', [PlaidController::class, 'getInvestmentHoldings']);
+
+
+Route::get('/plaid', function () {
+    return view('plaid');
 });
 
 

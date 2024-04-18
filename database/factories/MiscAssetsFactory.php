@@ -20,7 +20,7 @@ class MiscAssetsFactory extends Factory
             'misc_asset_name' => fake()->colorName(),
             'misc_asset_type' => fake()->randomElement(['Business', 'HSA', 'Intellectual Property', 'Other']),
             'initial_investment' => fake()->randomFloat(2, 0, 1000000000),
-            'quantity' => fake()->randomFloat(2, 0, 1000000000),
+            'quantity' => fake()->numberBetween(1, 50),
             'current_value' => fake()->randomFloat(2, 0, 1000000000),
         ];
     }

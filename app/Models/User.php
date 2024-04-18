@@ -81,4 +81,9 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class);
     }
 
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class);
+    }
+
 }

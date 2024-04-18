@@ -20,7 +20,7 @@ class InvestmentAccountsFactory extends Factory
             'platform_name' => fake()->company(),
             'investment_type' => fake()->randomElement(['Crypto', 'ETF', 'CD', 'Money Market Funds', 'Index Funds', 'Options','Stocks', 'Bonds', 'Mutual Funds', 'Private Equity']),
             'initial_investment' => fake()->randomFloat(2, 0, 1000000000),
-            'quantity' => fake()->randomFloat(2, 0, 1000000000),
+            'quantity' => fake()->numberBetween(1, 50),
             'current_value' => fake()->randomFloat(2, 0, 1000000000),
         ];
     }

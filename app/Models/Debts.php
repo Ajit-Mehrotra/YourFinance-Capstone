@@ -19,8 +19,7 @@ class Debts extends Model
         'pmt_frequency',
         'recurring_pmt_amt',
         'apr_interest',
-        'days_interest_deffered',
-        'days_pmt_deffered',
+        'days_pmt_deferred',
         'date_received',
     ];
 

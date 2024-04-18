@@ -9,7 +9,8 @@
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "opcodesio/log-viewer": "^3.5"
+        "opcodesio/log-viewer": "^3.5",
+        "tomorrow-ideas/plaid-sdk-php": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

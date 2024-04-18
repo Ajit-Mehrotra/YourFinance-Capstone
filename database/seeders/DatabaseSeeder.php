@@ -22,6 +22,7 @@ use App\Models\TangibleAssets;
 use Illuminate\Database\Seeder;
 use App\Models\InvestmentAccounts;
 use App\Models\RetirementAccounts;
+use App\Models\Transactions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,22 +47,34 @@ class DatabaseSeeder extends Seeder
             return ['addresses_id' => $addresses->random()->id];
         })->create(); // --> currently, the debts are not connected to Lenders, but they technically should be according to the code. 
       
-       
+        $categories = Categories::factory()->count(10)->create();
+        
         User::factory()
             ->count(50)
             ->state(function (array $attributes) use ($addresses) {
                 // Assign a random address to each user
                 return ['addresses_id' => $addresses->random()->id];
             })
+            
             ->has(LiquidAccounts::factory()->count(3)
                 ->has(Incomes::factory()->count(3)
                     ->has(Payers::factory()))
                 ->has(Expenses::factory()->count(3)
                     -> has(Vendors::factory()->count(3)) // --> this is fucked. Creates 200+ different vendors & categories. Shouldn't the relationship be the otherway around?
-                    -> has(Categories::factory()->count(3))
+                    ->state(function (array $attributes) use ($categories) {
+                        // Assign a random category to each Expense
+                        return ['categories_id' => $categories->random()->id];
+                    })
                     -> has(Subscriptions::factory()->count(3))
                 )
                 )
+            ->has(Transactions::factory()->count(25)
+            ->state(function (array $attributes) use ($categories) {
+                // Assign a random category to each Transaction
+                return ['categories_id' => $categories->random()->id];
+            })
+            )
+                    
             ->has(InvestmentAccounts::factory()->count(3))
             ->has(RetirementAccounts::factory()->count(3))
             ->has(TangibleAssets::factory()->count(3))

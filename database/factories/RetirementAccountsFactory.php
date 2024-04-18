@@ -20,7 +20,7 @@ class RetirementAccountsFactory extends Factory
             'platform_name' => fake()->company(),
             'retirement_type' => fake()->randomElement(['Traditional IRA', 'Roth IRA', 'Simple IRA', 'SEP IRA', 'Solo 401(k)', 'SIMPLE 401(k)', '403(b)', '457(b)', 'Keogh', 'Defined Benefit Plan', 'Money Purchase Plan', 'Profit Sharing Plan', 'Employee Stock Ownership Plan', 'Stock Bonus Plan', 'ESOP', 'Pension Plan', 'Annuity']),
             'initial_investment' => fake()->randomFloat(2, 0, 1000000000),
-            'quantity' => fake()->randomFloat(2, 0, 1000000000),
+            'quantity' => fake()->numberBetween(1, 50),
             'current_value' => fake()->randomFloat(2, 0, 1000000000),
         ];
     }

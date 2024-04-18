@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('pmt_frequency');
             $table->decimal('recurring_pmt_amt', 13, 2)->default(0);
             $table->decimal('apr_interest', 13, 2)->default(0);
-            $table->decimal('days_interest_deffered', 13, 2)->default(0);
-            $table->decimal('days_pmt_deffered', 13, 2)->default(0);
+            $table->decimal('days_pmt_deferred', 13, 2)->default(0);
             $table->date('date_received');
             $table->timestamps();
         });

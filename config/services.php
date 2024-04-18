@@ -34,6 +34,7 @@ return [
     'plaid' => [
         'client_id' => env('PLAID_CLIENT_ID'),
         'secret' => env('PLAID_SECRET'),
+        'environment' => env('PLAID_ENV'),
     ],
 
     'openai' => [

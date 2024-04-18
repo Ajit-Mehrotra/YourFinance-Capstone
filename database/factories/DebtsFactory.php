@@ -18,13 +18,12 @@ class DebtsFactory extends Factory
     {
         return [
             'debt_name' => fake()->colorName(),
-            'principle' => fake()->randomFloat(2, 0, 1000000000),
-            'balance' => fake()->randomFloat(2, 0, 1000000000),
+            'principle' => fake()->randomFloat(2, 0, 1000000),
+            'balance' => fake()->randomFloat(2, 0, 1000000),
             'pmt_frequency' => fake()->randomElement(['Monthly', 'Bi-Weekly', 'Weekly', 'Bi-Monthly', 'Annually', 'Quarterly', 'Semi-Annually', 'One-Time']),
-            'recurring_pmt_amt' => fake()->randomFloat(2, 0, 1000000000), 
+            'recurring_pmt_amt' => fake()->randomFloat(2, 0, 10000), 
             'apr_interest' => fake()->randomFloat(2, 0.0010, 0.9999), // 0.0010% to 99.99%
-            'days_interest_deffered' => fake()->randomFloat(2, 0, 1000000000), //days interest is deffered
-            'days_pmt_deffered' => fake()->randomFloat(2, 0, 1000000000), //days payment is deffered
+            'days_pmt_deferred' => fake()->numberBetween(1, 800), //days payment is deffered
             'date_received' => fake()->dateTime(),   
         ];
     }

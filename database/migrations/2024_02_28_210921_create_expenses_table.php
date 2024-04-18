@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('liquid_accounts_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('categories_id')->constrained()->cascadeOnDelete();
             $table->string('expense_name');
             $table->string('expense_type');
             $table->date('date_received');
