@@ -9,7 +9,7 @@
                             You Can Spend
                         </h5>
                         <span class="font-semibold underline text-xl text-red-500">
-                            $3,000
+                            $16,059
                         </span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">
@@ -39,7 +39,7 @@
                             You're Worth
                         </h5>
                         <span class="font-semibold text-xl text-blueGray-700">
-                            $12,000
+                            $1,242,096
                         </span>
                     </div>
 
@@ -64,7 +64,7 @@
                             Credit Score
                         </h5>
                         <span class="font-semibold text-xl text-blueGray-700">
-                            620
+                            700
                         </span>
                     </div>
                     <div class="relative w-auto pl-4 flex-initial">

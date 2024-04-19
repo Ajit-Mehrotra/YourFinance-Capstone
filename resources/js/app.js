@@ -1,12 +1,15 @@
 import './bootstrap';
 
-import './dash-chart'
+import './dash-chart';
+
 
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
 
 Alpine.start();
+
+// Plaid
 
 $(".link-account").click(function() {
     createLinkToken();
@@ -98,3 +101,55 @@ function getInvestmentHoldings(itemId) {
         }
     });
 }
+
+
+// Chatbot - OpenAI
+
+document.getElementById('chatForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const message = document.getElementById('message').value;
+    fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content')
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        })
+        .then(response => response.json()) // Correctly parse the JSON response
+        .then(data => {
+            console.log("Response received"); // Optionally log that we've received the response
+            console.log("Data: " + data)
+            console.log(data.choices[0].text.content);
+
+
+            document.getElementById('aiResponse').style.display = 'block';
+            document.getElementById('aiResponse').textContent = data.choices[0].text.content;
+        })
+        .catch(error => console.error('Error:', error)); // Proper error handling
+});
+
+document.getElementById('chatForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const messageInput = document.getElementById('messageInput');
+    const chat = document.getElementById('chat');
+
+    // Example: Append message to chat
+    const newMessage = document.createElement('div');
+    newMessage.textContent = messageInput.value;
+    newMessage.className = 'bg-white p-2 rounded shadow-sm';
+    chat.appendChild(newMessage);
+
+    // Clear input
+    messageInput.value = '';
+});
+
+
+// Chatbot 
+
+
+
