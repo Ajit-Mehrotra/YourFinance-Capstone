@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PlaidController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CalendarController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -27,19 +28,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/dashboard', function () {
-    $user = auth()->user(); 
-    $user_id = $user->id;
-    
-    $categories = Categories::with(['transactions'])->get();
-    
-    $transactions = Transactions::with('category')->where('user_id', $user_id)->get();
-  
-   
-    return view('dashboard', ['user' => $user, 'liquidAccounts' => $user->liquidAccounts, 
-    'investmentAccounts' => $user->investmentAccounts, 'transactions' => $transactions, 
-    'retirementAccounts' => $user->retirementAccounts, 'miscAssets' => $user->miscAssets, 'tangibleAssets' => $user->tangibleAssets, 'categories'=> $categories]);
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/users', function () {
@@ -75,9 +63,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard_test', function () {
-    return view('dashboard_test');
-});
+
+Route::get('/dashboard', function () {
+    $user = auth()->user(); 
+    $user_id = $user->id;
+    
+    $categories = Categories::with(['transactions'])->get();
+    
+    $transactions = Transactions::with('category')->where('user_id', $user_id)->get();
+  
+   
+    return view('dashboard', ['user' => $user, 'liquidAccounts' => $user->liquidAccounts, 
+    'investmentAccounts' => $user->investmentAccounts, 'transactions' => $transactions, 
+    'retirementAccounts' => $user->retirementAccounts, 'miscAssets' => $user->miscAssets, 'tangibleAssets' => $user->tangibleAssets, 'categories'=> $categories]);
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+// Route::get('/dashboard_test', function () {
+
+//     $user = auth()->user(); 
+//     $user_id = $user->id;
+    
+//     $transactions = Transactions::with('category')->where('user_id', $user_id)->get();
+
+
+//     return view('dashboard_test', ['user' => $user,'transactions' => $transactions,]);
+// });
+
+Route::get('/dashboard_test', [CalendarController::class, 'showCalendar']);
 
 Route::get('/improve', function () {
     return view('improve');

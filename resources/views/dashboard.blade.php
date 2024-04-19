@@ -105,19 +105,14 @@
                             <br>
                         @endforeach
 
-                        <h1 class="font-bold text-xl underline">Categories</h1>
+                        {{-- <h1 class="font-bold text-xl underline">Categories</h1>
                         @foreach ($categories as $category)
                             <p class="">{{ 'Category ID: ' . $category->id }}</p>
                             <p class="">{{ 'Category Name: ' . $category->category_name }}</p>
                             <p class="">{{ 'Category Description: ' . $category->category_description }}</p>
 
                             <br>
-                        @endforeach
-
-
-
-
-
+                        @endforeach --}}
 
                         <h1 class="font-bold text-xl underline">Transactions</h1>
                         @foreach ($transactions as $transaction)
