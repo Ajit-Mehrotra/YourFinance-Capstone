@@ -52,9 +52,6 @@ YourFinance aims to bridge this gap by leveraging modern technologies to provide
    ```bash
    git clone https://github.com/Ajit-Mehrotra/YourFinance-Capstone.git
    cd YourFinance-Capstone
-Sure! Here’s the completed README file for your project:
-
-markdown
 
 # YourFinance - A Financial Copilot
 
@@ -132,8 +129,7 @@ After setting up the project, you can access the application at `http://localhos
 ## Demo
 
 Check out a live demo of YourFinance [here](https://drive.google.com/file/d/1czW59Y-O2GS_Y-exTPzYvZ2JeX9K0DqC/view?usp=sharing).
-
-Check out the powerpoint presentation [here](https://www.canva.com/design/DAGB8UjCYWI/3ndv3nbN2J5saDuTZxI3bw/edit?utm_content=DAGB8UjCYWI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
+Peep the powerpoint presentation [here](https://www.canva.com/design/DAGB8UjCYWI/3ndv3nbN2J5saDuTZxI3bw/edit?utm_content=DAGB8UjCYWI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
 ## Contributing
 
