@@ -18,7 +18,7 @@
 
 ## Introduction
 
-Welcome to YourFinance, a financial copilot designed to democratize professional financial wellness insights using data analytics and automation. This project was developed as a capstone project at Bentley University by Ajit Mehrotra under the guidance of Professor Jim Pepe.
+Welcome to YourFinance, a financial copilot designed to democratize professional financial wellness insights using data analytics and automation. This project was developed as a capstone project at Bentley University by [Ajit Mehrotra](https://www.linkedin.com/in/ajit-mehrotra/) under the guidance of [Professor Jim Pepe](https://faculty.bentley.edu/profile/jpepe).
 
 ## Problem Statement
 
